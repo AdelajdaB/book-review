@@ -60,6 +60,16 @@ class ImportBooksJob implements ShouldQueue
                 continue;
             }
 
+            $existingBook = Book::where('title', $data['title'])
+                ->where('author', $data['author'])
+                ->first();
+
+            if ($existingBook) {
+                Log::info("Skipped duplicate book: {$data['title']} by {$data['author']}");
+                continue;
+            }
+
+            // Create new book
             $book = Book::create([
                 'title' => $data['title'],
                 'author' => $data['author']
