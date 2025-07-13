@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+import Button from '@/Components/Button.vue';
 
 defineOptions({
   layout: AuthenticatedLayout,
@@ -21,12 +22,7 @@ defineOptions({
       </p>
 
       <div class="flex justify-center space-x-4">
-        <Link
-          href="/books"
-          class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow transition"
-        >
-          Browse Books
-        </Link>
+        <Button link="/books" title="Browse Books" />
         <!-- <Link
           href="/admin/books"
           class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg shadow transition"

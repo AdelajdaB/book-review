@@ -16,6 +16,14 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                gray: require('tailwindcss/colors').gray,
+                primary: '#174d38',
+                secondary: '#6D071A',
+                faded: '#f2f2f2',
+                faded_dark: '#EDEDED',
+                mute: '#A8CBB7'
+            }
         },
     },
 

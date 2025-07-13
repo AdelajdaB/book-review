@@ -6,9 +6,9 @@ const { isDark, toggleDark } = useDarkMode()
 </script>
 
 <template>
-  <nav class="flex items-center justify-between px-6 py-4 bg-white dark:bg-gray-900 shadow">
+  <nav class="flex items-center justify-between px-6 py-4 bg-faded_dark dark:bg-gray-900 shadow">
     <!-- Left: Logo -->
-    <Link href="/" class="text-xl font-bold text-blue-600 dark:text-blue-400">
+    <Link href="/" class="text-xl font-bold text-primary hover:text-secondary dark:text-white dark:hover:text-mute">
       BookReview
     </Link>
 
@@ -16,13 +16,13 @@ const { isDark, toggleDark } = useDarkMode()
     <div class="flex space-x-4">
       <Link
         href="/books"
-        class="text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 font-medium"
+        class="text-primary dark:text-gray-200 hover:text-secondary dark:hover:text-mute font-medium"
       >
         Books
       </Link>
       <Link
         href="/about"
-        class="text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 font-medium"
+        class="text-gray-700 dark:text-gray-200 hover:text-secondary dark:hover:text-mute font-medium"
       >
         About
       </Link>
