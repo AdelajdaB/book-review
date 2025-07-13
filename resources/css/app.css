@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.basic-theme {
+  @apply dark:bg-gray-900 dark:text-white;
+}

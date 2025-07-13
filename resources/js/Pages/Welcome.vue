@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+
+defineOptions({
+  layout: AuthenticatedLayout,
+})
 </script>
 
 <template>
   <Head title="Home" />
 
-  <div class="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4 py-12">
+  <div class="min-h-screen bg-gray-50 basic-theme flex flex-col items-center justify-center px-4 py-12">
     <div class="max-w-2xl text-center">
       <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-        📚 Welcome to BookReview.io
+        📚 Welcome to BookReview
       </h1>
       <p class="text-lg text-gray-600 mb-8">
         Discover, review, and explore books with AI-generated insights.
