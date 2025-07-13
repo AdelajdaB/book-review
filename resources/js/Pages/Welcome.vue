@@ -2,6 +2,8 @@
 import { Head, Link } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import Button from '@/Components/Button.vue';
+import Headline from '@/Components/Headline.vue';
+import Text from '@/Components/Text.vue';
 
 defineOptions({
   layout: AuthenticatedLayout,
@@ -13,13 +15,12 @@ defineOptions({
 
   <div class="min-h-screen bg-gray-50 basic-theme flex flex-col items-center justify-center px-4 py-12">
     <div class="max-w-2xl text-center">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-        📚 Welcome to BookReview
-      </h1>
-      <p class="text-lg text-gray-600 mb-8">
+      <Headline variant="h1" title="📚 Welcome to BookReview" />
+
+      <Text variant="p" class="pb-4">
         Discover, review, and explore books with AI-generated insights.
         Whether you're a reader or a writer — we've got something for you.
-      </p>
+      </Text>
 
       <div class="flex justify-center space-x-4">
         <Button link="/books" title="Browse Books" />
@@ -34,31 +35,31 @@ defineOptions({
 
     <div class="mt-16 max-w-4xl grid gap-8 grid-cols-1 md:grid-cols-2">
       <div class="p-6 bg-white rounded-xl shadow">
-        <h2 class="text-xl font-semibold mb-2">🔍 Smart Descriptions</h2>
-        <p class="text-gray-600">
+        <Headline variant="h2" title="🔍 Smart Descriptions" />
+        <Text variant="p">
           We use AI to generate book summaries and reviews to give you fast, insightful overviews.
-        </p>
+        </Text>
       </div>
 
       <div class="p-6 bg-white rounded-xl shadow">
-        <h2 class="text-xl font-semibold mb-2">✍️ Author-Centric</h2>
-        <p class="text-gray-600">
+        <Headline variant="h2" title="✍️ Author-Centric" />
+        <Text variant="p">
           Easily add your books and let our system enhance them with high-quality content.
-        </p>
+        </Text>
       </div>
 
       <div class="p-6 bg-white rounded-xl shadow">
-        <h2 class="text-xl font-semibold mb-2">📈 Continuous Updates</h2>
-        <p class="text-gray-600">
+        <Headline variant="h2" title="📈 Continuous Updates" />
+        <Text variant="p">
           The library grows as new books are imported and enriched with up-to-date information.
-        </p>
+        </Text>
       </div>
 
       <div class="p-6 bg-white rounded-xl shadow">
-        <h2 class="text-xl font-semibold mb-2">🧠 AI-Powered Reviews</h2>
-        <p class="text-gray-600">
+        <Headline variant="h2" title="🧠 AI-Powered Review" />
+        <Text variant="p">
           Automated reviews provide context, sentiment, and detail beyond the basics.
-        </p>
+        </Text>
       </div>
     </div>
   </div>

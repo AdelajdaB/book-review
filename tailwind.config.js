@@ -22,7 +22,8 @@ export default {
                 secondary: '#6D071A',
                 faded: '#f2f2f2',
                 faded_dark: '#EDEDED',
-                mute: '#A8CBB7'
+                mute: '#A8CBB7',
+                content: 'black'
             }
         },
     },
