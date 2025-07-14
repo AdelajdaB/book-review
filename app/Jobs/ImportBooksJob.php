@@ -72,7 +72,8 @@ class ImportBooksJob implements ShouldQueue
             // Create new book
             $book = Book::create([
                 'title' => $data['title'],
-                'author' => $data['author']
+                'author' => $data['author'],
+                'status' => 'added'
             ]);
 
             Log::info("Imported book: {$book->title} by {$book->author}");
