@@ -38,4 +38,7 @@ return [
     'openai' => [
         'key' => env('OPENAI_API_KEY'),
     ],
+    'huggingface' => [
+        'api_key' => env('HF_API_KEY'),
+    ],
 ];

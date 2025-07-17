@@ -3,7 +3,7 @@
     import { Head, Link } from '@inertiajs/vue3';
 
     defineProps<{
-    books: Paginated<Book>
+        books: Paginated<Book>
     }>()
 </script>
 
@@ -19,6 +19,8 @@
             class="border p-4 rounded bg-white shadow"
         >
             <p class="text-lg font-semibold">{{ book.title }}</p>
+            <p>{{ book.description }}</p>
+            <p>Rating: {{ book.rating }} / 5</p>
             <p class="text-sm text-gray-600">by {{ book.author }}</p>
         </li>
         </ul>

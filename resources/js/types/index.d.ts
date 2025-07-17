@@ -9,6 +9,8 @@ export interface Book {
     id: number;
     title: string;
     author: string;
+    description: string;
+    rating: float;
 }
 
 export interface Paginated<T> {

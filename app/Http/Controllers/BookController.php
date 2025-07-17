@@ -10,7 +10,7 @@ class BookController extends Controller
 {
     public function index() {
 
-        $books = Book::select('id', 'title', 'author')
+        $books = Book::select('id', 'title', 'author', 'description', 'rating')
             ->orderByDesc('created_at')
             ->paginate(10)
             ->withQueryString();

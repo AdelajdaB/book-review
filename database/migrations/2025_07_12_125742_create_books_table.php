@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('author');
-            $table->decimal('rating', 2, 1)->nullable();
+            $table->float('rating')->nullable();
             $table->text('description')->nullable();
+            $table->string('status')->default('processing');
             $table->timestamps();
         });
     }

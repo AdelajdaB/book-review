@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\FileUpload;
+use Filament\Notifications\Notification;
 use App\Filament\Resources\BookResource\Pages;
 
 class BookResource extends Resource
@@ -48,6 +49,22 @@ class BookResource extends Resource
                 // Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
+            ->headerActions([
+                Action::make('Clear All')
+                    ->label('Clear All Books')
+                    ->color('danger')
+                    ->icon('heroicon-o-trash')
+                    ->requiresConfirmation()
+                    ->action(function () {
+                        \App\Models\Book::query()->delete();
+
+                        Notification::make()
+                            ->title('All books have been cleared.')
+                            ->success()
+                            ->send();
+                    }),
+            ])
+
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
