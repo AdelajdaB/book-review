@@ -20,12 +20,19 @@ class GenerateBookDescriptionAndReviews implements ShouldQueue
 
     public function handle(HuggingFaceService $ai): void
     {
+        Log::info("Starting AI generation for book: {$this->book->title} (ID: {$this->book->id})");
+        
         try {
             $data = $ai->generateBookData($this->book->title, $this->book->author);
 
             if (!$data) {
-                throw new \Exception("Failed to generate AI data.");
+                throw new \Exception("Failed to generate AI data - service returned null.");
             }
+
+            Log::info("AI data generated successfully for book: {$this->book->title}", [
+                'description_length' => strlen($data['description']),
+                'rating' => $data['rating']
+            ]);
 
             $this->book->update([
                 'description' => $data['description'],
@@ -33,11 +40,17 @@ class GenerateBookDescriptionAndReviews implements ShouldQueue
                 'status' => 'added',
             ]);
 
-            Log::info("AI data generated via Hugging Face for book: {$this->book->title}");
+            Log::info("Book updated successfully: {$this->book->title} - Status: added");
 
         } catch (\Throwable $e) {
+            Log::error("AI generation failed for book {$this->book->title} (ID: {$this->book->id}): " . $e->getMessage(), [
+                'exception' => $e->getTraceAsString()
+            ]);
+            
             $this->book->update(['status' => 'failed']);
-            Log::error("AI generation failed for book {$this->book->title}: " . $e->getMessage());
+            
+            // Re-throw the exception so the job is marked as failed
+            throw $e;
         }
     }
 }

@@ -33,15 +33,26 @@ class BookImporter extends Importer
         ]);
     }
 
-    public function afterSave(): void
-    {
-        GenerateBookDescriptionAndReviews::dispatch($this->record);
-    }
-
     public static function getCompletedNotificationBody(Import $import): string
     {
         $successfulRows = $import->successful_rows;
 
+        // Dispatch AI generation jobs for all successfully imported books
+        static::dispatchAiGenerationJobs($import);
+
         return "{$successfulRows} book" . \Illuminate\Support\Str::plural(' was', $successfulRows) . " successfully imported.";
+    }
+
+    protected static function dispatchAiGenerationJobs(Import $import): void
+    {
+        // Get all books that were created during this import
+        // We'll use the import's created_at timestamp to find recently created books
+        $recentBooks = Book::where('created_at', '>=', $import->created_at)
+            ->whereNull('description') // Only books that don't have AI-generated content yet
+            ->get();
+
+        foreach ($recentBooks as $book) {
+            GenerateBookDescriptionAndReviews::dispatch($book);
+        }
     }
 }

@@ -33,21 +33,24 @@ class BookResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')
+                    ->label('ID'),
+
                 TextColumn::make('title')
                     ->label('Title')
-                    ->searchable()
-                    ->sortable(),
+                    ->limit(20),
 
-                TextColumn::make('author')
-                    ->label('Author')
-                    ->searchable()
-                    ->sortable(),
+                TextColumn::make('status')
+                    ->label('Status'),
             ])
+            ->defaultPaginationPageOption(5)
+            ->paginationPageOptions([5, 10])
+            ->defaultSort('id', 'asc')
             ->filters([
-                //
+                // Temporarily remove all filters
             ])
             ->actions([
-                DeleteAction::make(),
+                // DeleteAction::make(), // Temporarily disabled
             ])
             ->headerActions([
                 ImportAction::make()
@@ -55,7 +58,7 @@ class BookResource extends Resource
             ])
 
             ->bulkActions([
-                DeleteBulkAction::make(),
+                // DeleteBulkAction::make(), // Temporarily disabled
             ]);
     }
 
