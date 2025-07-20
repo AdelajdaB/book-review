@@ -12,6 +12,7 @@ use App\Jobs\GenerateBookDescriptionAndReviews;
 class BookImporter extends Importer
 {
     protected static ?string $model = Book::class;
+    protected bool $shouldQueue = true;
 
     public static function getColumns(): array
     {
