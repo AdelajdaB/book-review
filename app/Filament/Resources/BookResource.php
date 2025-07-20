@@ -6,13 +6,14 @@ use App\Models\Book;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use App\Jobs\ImportBooksJob;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ImportAction;
+use App\Filament\Imports\BookImporter;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\FileUpload;
-use Filament\Notifications\Notification;
 use App\Filament\Resources\BookResource\Pages;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\DeleteBulkAction;
+
 
 class BookResource extends Resource
 {
@@ -46,29 +47,15 @@ class BookResource extends Resource
                 //
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                DeleteAction::make(),
             ])
             ->headerActions([
-                Action::make('Clear All')
-                    ->label('Clear All Books')
-                    ->color('danger')
-                    ->icon('heroicon-o-trash')
-                    ->requiresConfirmation()
-                    ->action(function () {
-                        \App\Models\Book::query()->delete();
-
-                        Notification::make()
-                            ->title('All books have been cleared.')
-                            ->success()
-                            ->send();
-                    }),
+                ImportAction::make()
+                ->importer(BookImporter::class),
             ])
 
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                DeleteBulkAction::make(),
             ]);
     }
 
