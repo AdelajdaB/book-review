@@ -31,14 +31,22 @@ class GenerateBookDescriptionAndReviews implements ShouldQueue
 
             Log::info("AI data generated successfully for book: {$this->book->title}", [
                 'description_length' => strlen($data['description']),
-                'rating' => $data['rating']
+                'rating' => $data['rating'],
+                'has_cover' => !empty($data['cover_image'])
             ]);
 
-            $this->book->update([
+            $updateData = [
                 'description' => $data['description'],
                 'rating' => $data['rating'],
                 'status' => 'added',
-            ]);
+            ];
+
+            // Add cover image if generated successfully
+            if (!empty($data['cover_image'])) {
+                $updateData['cover_image'] = $data['cover_image'];
+            }
+
+            $this->book->update($updateData);
 
             Log::info("Book updated successfully: {$this->book->title} - Status: added");
 

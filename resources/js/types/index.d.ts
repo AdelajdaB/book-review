@@ -11,6 +11,9 @@ export interface Book {
     author: string;
     description: string;
     rating: float;
+    cover_image?: string;
+    cover_url?: string;
+    has_cover?: boolean;
 }
 
 export interface Paginated<T> {

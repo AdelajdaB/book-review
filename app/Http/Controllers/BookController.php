@@ -10,10 +10,15 @@ class BookController extends Controller
 {
     public function index() {
 
-        $books = Book::select('id', 'title', 'author', 'description', 'rating')
+        $books = Book::select('id', 'title', 'author', 'description', 'rating', 'cover_image')
             ->orderByDesc('created_at')
             ->paginate(10)
             ->withQueryString();
+
+        $books->getCollection()->transform(function ($book) {
+            $book->append(['cover_url', 'has_cover']);
+            return $book;
+        });
 
         return Inertia::render('Books/Index', [
             'books' => $books,

@@ -12,16 +12,41 @@
     <div class="p-6">
         <h1 class="text-2xl font-bold mb-4">📚 Book List</h1>
 
-        <ul v-if="books.data.length" class="space-y-2 mb-6">
+        <ul v-if="books.data.length" class="space-y-4 mb-6">
         <li
             v-for="book in books.data"
             :key="book.id"
             class="border p-4 rounded bg-white shadow"
         >
-            <p class="text-lg font-semibold">{{ book.title }}</p>
-            <p>{{ book.description }}</p>
-            <p>Rating: {{ book.rating }} / 5</p>
-            <p class="text-sm text-gray-600">by {{ book.author }}</p>
+            <div class="flex gap-4">
+                <!-- Book Cover Image -->
+                <div class="flex-shrink-0">
+                    <img 
+                        v-if="book.cover_url" 
+                        :src="book.cover_url" 
+                        :alt="`Cover of ${book.title}`"
+                        class="w-24 h-36 object-cover rounded shadow"
+                        loading="lazy"
+                    />
+                    <div 
+                        v-else 
+                        class="w-24 h-36 bg-gray-200 rounded shadow flex items-center justify-center"
+                    >
+                        <span class="text-gray-400 text-xs text-center">No Cover</span>
+                    </div>
+                </div>
+                
+                <!-- Book Details -->
+                <div class="flex-1 min-w-0">
+                    <p class="text-lg font-semibold text-gray-900 mb-2">{{ book.title }}</p>
+                    <p class="text-sm text-gray-600 mb-2">by {{ book.author }}</p>
+                    <p class="text-gray-700 text-sm mb-2 line-clamp-3">{{ book.description }}</p>
+                    <div class="flex items-center">
+                        <span class="text-yellow-500 mr-1">★</span>
+                        <span class="text-sm font-medium">{{ book.rating }} / 5</span>
+                    </div>
+                </div>
+            </div>
         </li>
         </ul>
 
@@ -45,3 +70,13 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+</style>
